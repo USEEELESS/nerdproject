@@ -1,5 +1,5 @@
 import { Canvas } from "@react-three/fiber";
-import { Environment, Lightformer, OrbitControls, useGLTF, useProgress } from "@react-three/drei";
+import { Environment, Lightformer, OrbitControls, useGLTF } from "@react-three/drei";
 import { Suspense, useEffect, useMemo } from "react";
 import * as THREE from "three";
 
@@ -32,19 +32,9 @@ function PspModel() {
   return <primitive object={model} rotation={[Math.PI / 2 - 0.08, -0.08, 0.02]} />;
 }
 
-function Loader() {
-  const { progress } = useProgress();
-  return (
-    <div className="absolute inset-0 grid place-items-center" aria-live="polite">
-      <span className="font-mono text-xs text-muted-foreground">{Math.round(progress)}%</span>
-    </div>
-  );
-}
-
 export function PspScene() {
   return (
     <div className="relative h-[58svh] min-h-[360px] w-full cursor-grab active:cursor-grabbing sm:h-[66svh]">
-      <Loader />
       <Canvas
         dpr={[1, 1.5]}
         shadows
