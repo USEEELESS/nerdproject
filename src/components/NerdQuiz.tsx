@@ -1,7 +1,6 @@
 import { ArrowDown, ArrowRight } from "lucide-react";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 
-import shirtAsset from "@/assets/nerd-shirt.png.asset.json";
 import logoUrl from "@/assets/nerd-logo.svg?url";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -16,21 +15,21 @@ const QUIZ = {
     questions: [
       { text: 'Кто играл Джокера в «Тёмном рыцаре»?', answers: ["хит леджер", "heath ledger"] },
       { text: 'Как называется существо, которое имплантирует зародыша ксеноморфа в человека в «Чужом»?', answers: ["лицехват", "facehugger", "фейсхаггер"] },
-      { text: "Фильм Нолана, где время идёт с разной скоростью на разных уровнях?", answers: ["начало", "inception"] },
+      { text: "Фильм Нолана с волчком?", answers: ["начало", "inception"] },
     ],
   },
   games: {
     label: "Игры",
     questions: [
-      { text: "Как зовут дочь Гарри Мейсона в Silent Hill?", answers: ["шерил", "cheryl"] },
-      { text: "Как называется проклятие бессмертия, которым отмечена нежить в Dark Souls?", answers: ["темное клеймо", "тёмное клеймо", "темная метка", "тёмная метка", "darksign"] },
+      { text: "Сколько стоит Desert Eagle в 1.6?", answers: ["650", "650 долларов", "$650"] },
+      { text: "В какой игре была с*кс миниигра QTE?", answers: ["год оф вар", "god of war", "бог войны"] },
       { text: "Как зовут ИИ-антагониста в Portal?", answers: ["glados", "гладос", "gla dos"] },
     ],
   },
   comics: {
     label: "Комиксы",
     questions: [
-      { text: "Кто настоящий автор графического романа Watchmen?", answers: ["алан мур", "alan moore"] },
+      { text: "Кто настоящий автор графического романа «Хранители»?", answers: ["алан мур", "alan moore"] },
       { text: "Как называется секретная организация, на которую работает Ник Фьюри в Marvel?", answers: ["щит", "shield", "s h i e l d"] },
       { text: "Родная планета Супермена?", answers: ["криптон", "krypton"] },
     ],
@@ -48,6 +47,7 @@ export function NerdQuiz() {
   const [answer, setAnswer] = useState("");
   const [motion, setMotion] = useState<"enter" | "exit" | "wrong">("enter");
   const [word, setWord] = useState("GOOD");
+  const [answeredCount, setAnsweredCount] = useState(0);
   const [notice, setNotice] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const timers = useRef<Array<ReturnType<typeof setTimeout>>>([]);
@@ -63,10 +63,33 @@ export function NerdQuiz() {
     setTopic(key);
     setQuestionIndex(0);
     setAnswer("");
+    setAnsweredCount(0);
     setMotion("enter");
     setPhase("quiz");
     window.scrollTo({ top: 0, behavior: "smooth" });
     later(() => inputRef.current?.focus(), 520);
+  };
+
+  const finishQuiz = (correctAnswers: number) => {
+    const result = correctAnswers === 3 ? "GOOD" : correctAnswers === 2 ? "NICE" : "OKAY";
+    setPhase("celebration");
+    setWord(result);
+    if (correctAnswers === 3) later(() => setWord("JOB"), 1050);
+    later(() => setPhase("reward"), correctAnswers === 3 ? 2150 : 1250);
+  };
+
+  const skipQuestion = (skipAll: boolean) => {
+    setMotion("exit");
+    later(() => {
+      if (skipAll || questionIndex === 2) {
+        finishQuiz(answeredCount);
+        return;
+      }
+      setQuestionIndex((current) => current + 1);
+      setAnswer("");
+      setMotion("enter");
+      later(() => inputRef.current?.focus(), 50);
+    }, 470);
   };
 
   const submitAnswer = (event: FormEvent) => {
@@ -86,13 +109,12 @@ export function NerdQuiz() {
 
     setMotion("exit");
     later(() => {
+      const nextAnsweredCount = answeredCount + 1;
       if (questionIndex === 2) {
-        setPhase("celebration");
-        setWord("GOOD");
-        later(() => setWord("JOB"), 1050);
-        later(() => setPhase("reward"), 2150);
+        finishQuiz(nextAnsweredCount);
         return;
       }
+      setAnsweredCount(nextAnsweredCount);
       setQuestionIndex((current) => current + 1);
       setAnswer("");
       setMotion("enter");
@@ -128,6 +150,10 @@ export function NerdQuiz() {
                 <ArrowRight strokeWidth={1.25} />
               </Button>
             </form>
+            <div className="mt-7 flex flex-wrap gap-x-6 gap-y-2 font-mono text-[10px] uppercase text-muted-foreground">
+              <button type="button" onClick={() => skipQuestion(false)} className="transition-colors hover:text-primary">Пропустить вопрос</button>
+              <button type="button" onClick={() => skipQuestion(true)} className="transition-colors hover:text-primary">Пропустить все</button>
+            </div>
           </div>
         </section>
       </main>
@@ -146,20 +172,20 @@ export function NerdQuiz() {
     return (
       <main className="grid min-h-svh place-items-center overflow-hidden bg-background px-5 py-10">
         <section className="reward-enter flex w-full max-w-3xl flex-col items-center text-center">
-          <img src={shirtAsset.url} alt="Чёрная футболка NERD" className="h-auto max-h-[58svh] w-full object-contain" />
+          <img src="/images/тестовыи_образец_футболка.jpg" alt="Чёрная футболка NERD" className="h-auto max-h-[58svh] w-full object-contain" />
           <h1 className="mt-3 max-w-[18rem] text-2xl font-extralight leading-tight sm:max-w-none sm:text-5xl">Молодец, ты заслужил</h1>
           <Button
             type="button"
             variant="ghost"
-            onClick={() => {
-              setNotice(true);
-              later(() => setNotice(false), 2200);
-            }}
+            asChild
+            onClick={() => setNotice(true)}
             className="group mt-7 rounded-none px-0 text-sm font-extralight text-foreground hover:bg-transparent hover:text-primary"
           >
-            Заказать <ArrowRight className="transition-transform duration-300 group-hover:translate-x-1.5" strokeWidth={1.2} />
+            <a href="https://t.me/useee_less" target="_blank" rel="noreferrer">
+              Заказать <ArrowRight className="transition-transform duration-300 group-hover:translate-x-1.5" strokeWidth={1.2} />
+            </a>
           </Button>
-          <p className={cn("mt-3 font-mono text-[10px] uppercase text-muted-foreground transition-opacity", notice ? "opacity-100" : "opacity-0")} aria-live="polite">Скоро в продаже</p>
+          <p className={cn("mt-3 font-mono text-[10px] uppercase text-muted-foreground transition-opacity", notice ? "opacity-100" : "opacity-0")} aria-live="polite">Перейти в Telegram</p>
         </section>
       </main>
     );
@@ -196,6 +222,10 @@ export function NerdQuiz() {
               </Button>
             ))}
           </div>
+          <a href="https://t.me/useee_less" target="_blank" rel="noreferrer" className="group mx-auto mt-20 flex w-fit items-center gap-3 font-mono text-[10px] uppercase text-muted-foreground transition-colors hover:text-primary sm:mt-28">
+            <span>Я здесь ради футболки</span>
+            <ArrowRight className="transition-transform duration-300 group-hover:translate-x-1.5" strokeWidth={1} />
+          </a>
         </div>
       </section>
     </main>

@@ -70,6 +70,7 @@ export function PspScene() {
         {createElement(Suspense, { fallback: null }, createElement(PspModel))}
         {createElement(OrbitControls, {
           makeDefault: true,
+          target: [0, 3.1, 0],
           enablePan: false,
           enableZoom: false,
           minPolarAngle: Math.PI * 0.3,
