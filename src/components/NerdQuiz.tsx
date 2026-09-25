@@ -192,7 +192,7 @@ export function NerdQuiz() {
                 onClick={() => selectTopic(key)}
                 className="topic-button h-auto rounded-none bg-transparent py-4 text-2xl font-extralight hover:bg-transparent sm:text-3xl lg:text-4xl"
               >
-                «{QUIZ[key].label}»
+                {QUIZ[key].label}
               </Button>
             ))}
           </div>

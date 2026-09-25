@@ -31,7 +31,7 @@ function PspModel() {
 
   return createElement(
     "group",
-    { position: [0, 1.85, 0], rotation: [0, -0.08, -0.035] },
+    { position: [0, 3.1, 0], rotation: [0, -0.08, -0.035] },
     createElement("primitive", { object: model, rotation: [Math.PI / 2 - 0.3, 0, 0] }),
   );
 }
