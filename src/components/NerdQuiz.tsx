@@ -102,6 +102,7 @@ export function NerdQuiz() {
 
   if (phase === "quiz") {
     const question = QUIZ[topic].questions[questionIndex];
+    if (!question) return null;
     return (
       <main className="grid min-h-svh place-items-center overflow-hidden bg-background px-5 py-10">
         <section className="w-full max-w-5xl" aria-live="polite">
