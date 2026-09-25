@@ -11,7 +11,7 @@ function PspModel() {
     const object = scene.clone(true);
     const box = new THREE.Box3().setFromObject(object);
     const size = box.getSize(new THREE.Vector3());
-    const scale = 8.4 / Math.max(size.x, size.y, size.z, 1);
+    const scale = 10.2 / Math.max(size.x, size.y, size.z, 1);
     object.scale.setScalar(scale);
     object.updateWorldMatrix(true, true);
     const normalized = new THREE.Box3().setFromObject(object);
@@ -29,7 +29,11 @@ function PspModel() {
     });
   }, [model]);
 
-  return <primitive object={model} rotation={[Math.PI / 2 - 0.08, -0.08, 0.02]} />;
+  return (
+    <group position={[0, 0.15, 0]} rotation={[0, -0.08, -0.035]}>
+      <primitive object={model} rotation={[Math.PI / 2 - 0.3, 0, 0]} />
+    </group>
+  );
 }
 
 export function PspScene() {
@@ -38,25 +42,26 @@ export function PspScene() {
       <Canvas
         dpr={[1, 1.5]}
         shadows
-        camera={{ position: [0, 0.35, 10.5], fov: 40, near: 0.1, far: 100 }}
-        gl={{ antialias: true }}
+        camera={{ position: [0, 0.45, 8.8], fov: 40, near: 0.1, far: 100 }}
+        gl={{ antialias: true, toneMappingExposure: 1.35 }}
       >
         <color attach="background" args={["#030303"]} />
-        <ambientLight intensity={1.1} color="#a9bdc8" />
+        <ambientLight intensity={1.8} color="#b9d7e4" />
         <spotLight
-          position={[-5, 6, 6]}
-          color="#ccefff"
-          intensity={85}
-          angle={0.38}
-          penumbra={0.85}
+          position={[-4, 5, 7]}
+          color="#d9f5ff"
+          intensity={155}
+          angle={0.52}
+          penumbra={0.72}
           castShadow
           shadow-mapSize-width={1024}
           shadow-mapSize-height={1024}
         />
-        <pointLight position={[4.5, -1, 3]} color="#75bad7" intensity={38} />
+        <spotLight position={[4, 2, 6]} color="#8edcff" intensity={95} angle={0.62} penumbra={0.9} />
+        <pointLight position={[-4, 1, -2]} color="#5ca9cb" intensity={58} />
         <Environment resolution={128}>
-          <Lightformer intensity={2.2} position={[-3, 5, 3]} scale={[3, 3, 1]} />
-          <Lightformer intensity={0.9} color="#8bc5df" position={[5, 0, 1]} rotation-y={Math.PI / 2} scale={[8, 1, 1]} />
+          <Lightformer intensity={4.2} position={[-3, 5, 4]} scale={[4, 4, 1]} />
+          <Lightformer intensity={2.4} color="#a6ddf2" position={[5, 0, 2]} rotation-y={Math.PI / 2} scale={[8, 2, 1]} />
         </Environment>
         <Suspense fallback={null}>
           <PspModel />
