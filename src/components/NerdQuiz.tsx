@@ -111,7 +111,7 @@ export function NerdQuiz() {
             <span>0{questionIndex + 1} / 03</span>
           </div>
           <div key={questionIndex} className={cn("question-panel", motion === "exit" && "question-exit", motion === "wrong" && "question-wrong")}>
-            <h1 className="max-w-4xl text-3xl font-medium leading-[1.12] sm:text-5xl lg:text-6xl">{question.text}</h1>
+            <h1 className="max-w-4xl text-3xl font-extralight leading-[1.12] sm:text-5xl lg:text-6xl">{question.text}</h1>
             <form onSubmit={submitAnswer} className="mt-14 grid grid-cols-[minmax(0,1fr)_auto] items-end gap-4 sm:mt-20 sm:gap-7">
               <label className="min-w-0">
                 <span className="sr-only">Ваш ответ</span>
@@ -147,7 +147,7 @@ export function NerdQuiz() {
       <main className="grid min-h-svh place-items-center overflow-hidden bg-background px-5 py-10">
         <section className="reward-enter flex w-full max-w-3xl flex-col items-center text-center">
           <img src={shirtAsset.url} alt="Чёрная футболка NERD" className="h-auto max-h-[58svh] w-full object-contain" />
-          <h1 className="mt-3 max-w-[18rem] text-2xl font-medium leading-tight sm:max-w-none sm:text-5xl">Молодец, ты заслужил</h1>
+          <h1 className="mt-3 max-w-[18rem] text-2xl font-extralight leading-tight sm:max-w-none sm:text-5xl">Молодец, ты заслужил</h1>
           <Button
             type="button"
             variant="ghost"
@@ -155,7 +155,7 @@ export function NerdQuiz() {
               setNotice(true);
               later(() => setNotice(false), 2200);
             }}
-            className="group mt-7 rounded-none px-0 text-sm font-normal uppercase text-foreground hover:bg-transparent hover:text-primary"
+            className="group mt-7 rounded-none px-0 text-sm font-extralight text-foreground hover:bg-transparent hover:text-primary"
           >
             Заказать <ArrowRight className="transition-transform duration-300 group-hover:translate-x-1.5" strokeWidth={1.2} />
           </Button>
@@ -190,7 +190,7 @@ export function NerdQuiz() {
                 type="button"
                 variant="ghost"
                 onClick={() => selectTopic(key)}
-                className="topic-button h-auto rounded-none bg-transparent py-4 text-2xl font-normal hover:bg-transparent sm:text-3xl lg:text-4xl"
+                className="topic-button h-auto rounded-none bg-transparent py-4 text-2xl font-extralight hover:bg-transparent sm:text-3xl lg:text-4xl"
               >
                 «{QUIZ[key].label}»
               </Button>

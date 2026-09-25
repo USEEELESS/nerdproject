@@ -30,7 +30,7 @@ function PspModel() {
   }, [model]);
 
   return (
-    <group position={[0, 0.15, 0]} rotation={[0, -0.08, -0.035]}>
+    <group position={[0, 1.85, 0]} rotation={[0, -0.08, -0.035]}>
       <primitive object={model} rotation={[Math.PI / 2 - 0.3, 0, 0]} />
     </group>
   );
@@ -43,10 +43,12 @@ export function PspScene() {
         dpr={[1, 1.5]}
         shadows
         camera={{ position: [0, 0.45, 8.8], fov: 40, near: 0.1, far: 100 }}
-        gl={{ antialias: true, toneMappingExposure: 1.35 }}
+        gl={{ antialias: true, toneMappingExposure: 1.55 }}
       >
         <color attach="background" args={["#030303"]} />
-        <ambientLight intensity={1.8} color="#b9d7e4" />
+        <ambientLight intensity={2.8} color="#d4e7ee" />
+        <hemisphereLight args={["#dff6ff", "#21343d", 2.2]} />
+        <spotLight position={[0, 2.5, 8]} color="#f2fbff" intensity={120} angle={0.75} penumbra={0.92} />
         <spotLight
           position={[-4, 5, 7]}
           color="#d9f5ff"
