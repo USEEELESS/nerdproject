@@ -61,23 +61,23 @@ export function PspScene() {
         })}
         {createElement("spotLight", { position: [4, 2, 6], color: "#8edcff", intensity: 95, angle: 0.62, penumbra: 0.9 })}
         {createElement("pointLight", { position: [-4, 1, -2], color: "#5ca9cb", intensity: 58 })}
-        <Environment resolution={128}>
-          <Lightformer intensity={4.2} position={[-3, 5, 4]} scale={[4, 4, 1]} />
-          <Lightformer intensity={2.4} color="#a6ddf2" position={[5, 0, 2]} rotation-y={Math.PI / 2} scale={[8, 2, 1]} />
-        </Environment>
-        <Suspense fallback={null}>
-          <PspModel />
-        </Suspense>
-        <OrbitControls
-          makeDefault
-          enablePan={false}
-          enableZoom={false}
-          minPolarAngle={Math.PI * 0.3}
-          maxPolarAngle={Math.PI * 0.7}
-          rotateSpeed={0.55}
-          dampingFactor={0.055}
-          enableDamping
-        />
+        {createElement(
+          Environment,
+          { resolution: 128 },
+          createElement(Lightformer, { intensity: 4.2, position: [-3, 5, 4], scale: [4, 4, 1] }),
+          createElement(Lightformer, { intensity: 2.4, color: "#a6ddf2", position: [5, 0, 2], rotationY: Math.PI / 2, scale: [8, 2, 1] }),
+        )}
+        {createElement(Suspense, { fallback: null }, createElement(PspModel))}
+        {createElement(OrbitControls, {
+          makeDefault: true,
+          enablePan: false,
+          enableZoom: false,
+          minPolarAngle: Math.PI * 0.3,
+          maxPolarAngle: Math.PI * 0.7,
+          rotateSpeed: 0.55,
+          dampingFactor: 0.055,
+          enableDamping: true,
+        })}
       </Canvas>
       <div className="pointer-events-none absolute inset-x-[12%] bottom-[7%] h-px bg-gradient-to-r from-transparent via-primary/35 to-transparent blur-[1px]" />
     </div>
