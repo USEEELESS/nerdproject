@@ -147,7 +147,7 @@ export function NerdQuiz() {
       <main className="grid min-h-svh place-items-center overflow-hidden bg-background px-5 py-10">
         <section className="reward-enter flex w-full max-w-3xl flex-col items-center text-center">
           <img src={shirtAsset.url} alt="Чёрная футболка NERD" className="h-auto max-h-[58svh] w-full object-contain" />
-          <h1 className="mt-3 text-3xl font-medium sm:text-5xl">Молодец, ты заслужил</h1>
+          <h1 className="mt-3 max-w-[18rem] text-2xl font-medium leading-tight sm:max-w-none sm:text-5xl">Молодец, ты заслужил</h1>
           <Button
             type="button"
             variant="ghost"

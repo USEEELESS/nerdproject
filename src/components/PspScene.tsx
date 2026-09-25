@@ -29,7 +29,7 @@ function PspModel() {
     });
   }, [model]);
 
-  return <primitive object={model} rotation={[-0.08, -0.1, 0.02]} />;
+  return <primitive object={model} rotation={[Math.PI / 2 - 0.08, -0.08, 0.02]} />;
 }
 
 function Loader() {
@@ -52,18 +52,18 @@ export function PspScene() {
         gl={{ antialias: true }}
       >
         <color attach="background" args={["#030303"]} />
-        <ambientLight intensity={0.35} color="#8aa0ad" />
+        <ambientLight intensity={1.1} color="#a9bdc8" />
         <spotLight
           position={[-5, 6, 6]}
           color="#ccefff"
-          intensity={45}
+          intensity={85}
           angle={0.38}
           penumbra={0.85}
           castShadow
           shadow-mapSize-width={1024}
           shadow-mapSize-height={1024}
         />
-        <pointLight position={[4.5, -1, 3]} color="#446779" intensity={15} />
+        <pointLight position={[4.5, -1, 3]} color="#75bad7" intensity={38} />
         <Environment resolution={128}>
           <Lightformer intensity={2.2} position={[-3, 5, 3]} scale={[3, 3, 1]} />
           <Lightformer intensity={0.9} color="#8bc5df" position={[5, 0, 1]} rotation-y={Math.PI / 2} scale={[8, 1, 1]} />
@@ -86,5 +86,3 @@ export function PspScene() {
     </div>
   );
 }
-
-useGLTF.preload(pspAsset.url);
