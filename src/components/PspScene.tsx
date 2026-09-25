@@ -65,7 +65,7 @@ export function PspScene() {
           Environment,
           { resolution: 128 },
           createElement(Lightformer, { intensity: 4.2, position: [-3, 5, 4], scale: [4, 4, 1] }),
-          createElement(Lightformer, { intensity: 2.4, color: "#a6ddf2", position: [5, 0, 2], rotationY: Math.PI / 2, scale: [8, 2, 1] }),
+          createElement(Lightformer, { intensity: 2.4, color: "#a6ddf2", position: [5, 0, 2], rotation: [0, Math.PI / 2, 0], scale: [8, 2, 1] }),
         )}
         {createElement(Suspense, { fallback: null }, createElement(PspModel))}
         {createElement(OrbitControls, {
