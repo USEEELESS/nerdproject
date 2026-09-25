@@ -1,14 +1,18 @@
-# Welcome to your Lovable project
+# Dreamscape Quiz
+
+давай сделаем сайт несложный черный фон hero секция это 3д моделька псп драматичный свет на нее и ее можно крутить. ниже нее надпись небольшая пройти тест и стрелочка как из игры nfs underground небольшая. шапка небольшая по центру логотип векторный который я приложу. ниже идет тест небольшой на выбор три темы из текстового документа который я приложил. в ряд три темы текстом в кавычках. когда на темуКороче, когда на тему наводишься, она чуток светится таким беленьким. По кра... Давай очень бледно-голубым будет светиться. Так, выбираешь тему, да, и у тебя все вообще с экрана пропадает. У тебя появляется один вопрос, как будто набирается текст. Может, чуть... Давай даже не набирается, а вот э, анимация появления снизу текст выходит. И с, с нулевой прозрачности в прозрачность 100. Анимация снизу вверх, плавное появление. Условно, анимация там полсекунды, да. А, появляется первый вопрос. Ниже вопроса просто как одной полосочкой окошко для ввода ответа. И справа обычная, самая простая стрелочка, тонкая, с скругленными краями. Вот, если вопрос отвечен правильно, следующий вопрос, то есть появляется справа налево. То есть вопрос, на который уже ответили, уходит влево. Вопрос, который появляется, приходит справа, также с прозрачностью, также с появлением полусекунды. Вот. Если ответил неправильно, условно, такая анимация чуток потрясывания вопроса, и пропадает текст, который ты вводил. Вот. И чуток красным текст светится, подсветка становится чуток красным. Вот дальше, когда ты ответил на три вопроса, появляется такой, ну, всплывает текст. По одному слову, каждому слову по центру экрана занимающими 50% экрана "good job". Вот. Потом текст пропадает, и появляется картинка с футболкой, которую я привожу, и ниже условно кнопка, даже, ну, вот кнопка текст, просто кнопка текстом со стрелочкой, э, типа заказать условно. А выше, выше над этой кнопкой надпись «Молодец, ты заслужил». И вот типа градация такая «Фотка футболки», текст «Молодец, ты заслужил», кнопка. Вот. Текст «Молодец, ты заслужил», больше кнопки. плавные анимации везде
 
 This project was built with [Lovable](https://lovable.dev).
 
+**Live app**: https://nerdproject.lovable.app
+
 ## Build with Lovable
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/907db091-d8fe-421b-89a3-68dfbc971dd2).
 
 - **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
 ## Development
 
@@ -20,10 +24,3 @@ cd <repository-name>
 npm i
 npm run dev
 ```
-
-## Built with
-
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
