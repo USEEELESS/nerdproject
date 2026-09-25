@@ -1,6 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 import { Environment, Lightformer, OrbitControls, useGLTF } from "@react-three/drei";
-import { Suspense, useEffect, useMemo } from "react";
+import { createElement, Suspense, useEffect, useMemo } from "react";
 import * as THREE from "three";
 
 import pspAsset from "@/assets/nerd-psp.glb.asset.json";
@@ -29,10 +29,10 @@ function PspModel() {
     });
   }, [model]);
 
-  return (
-    <group position={[0, 1.85, 0]} rotation={[0, -0.08, -0.035]}>
-      <primitive object={model} rotation={[Math.PI / 2 - 0.3, 0, 0]} />
-    </group>
+  return createElement(
+    "group",
+    { position: [0, 1.85, 0], rotation: [0, -0.08, -0.035] },
+    createElement("primitive", { object: model, rotation: [Math.PI / 2 - 0.3, 0, 0] }),
   );
 }
 
@@ -45,22 +45,22 @@ export function PspScene() {
         camera={{ position: [0, 0.45, 8.8], fov: 40, near: 0.1, far: 100 }}
         gl={{ antialias: true, toneMappingExposure: 1.55 }}
       >
-        <color attach="background" args={["#030303"]} />
-        <ambientLight intensity={2.8} color="#d4e7ee" />
-        <hemisphereLight args={["#dff6ff", "#21343d", 2.2]} />
-        <spotLight position={[0, 2.5, 8]} color="#f2fbff" intensity={120} angle={0.75} penumbra={0.92} />
-        <spotLight
-          position={[-4, 5, 7]}
-          color="#d9f5ff"
-          intensity={155}
-          angle={0.52}
-          penumbra={0.72}
-          castShadow
-          shadow-mapSize-width={1024}
-          shadow-mapSize-height={1024}
-        />
-        <spotLight position={[4, 2, 6]} color="#8edcff" intensity={95} angle={0.62} penumbra={0.9} />
-        <pointLight position={[-4, 1, -2]} color="#5ca9cb" intensity={58} />
+        {createElement("color", { attach: "background", args: ["#030303"] })}
+        {createElement("ambientLight", { intensity: 2.8, color: "#d4e7ee" })}
+        {createElement("hemisphereLight", { args: ["#dff6ff", "#21343d", 2.2] })}
+        {createElement("spotLight", { position: [0, 2.5, 8], color: "#f2fbff", intensity: 120, angle: 0.75, penumbra: 0.92 })}
+        {createElement("spotLight", {
+          position: [-4, 5, 7],
+          color: "#d9f5ff",
+          intensity: 155,
+          angle: 0.52,
+          penumbra: 0.72,
+          castShadow: true,
+          "shadow-mapSize-width": 1024,
+          "shadow-mapSize-height": 1024,
+        })}
+        {createElement("spotLight", { position: [4, 2, 6], color: "#8edcff", intensity: 95, angle: 0.62, penumbra: 0.9 })}
+        {createElement("pointLight", { position: [-4, 1, -2], color: "#5ca9cb", intensity: 58 })}
         <Environment resolution={128}>
           <Lightformer intensity={4.2} position={[-3, 5, 4]} scale={[4, 4, 1]} />
           <Lightformer intensity={2.4} color="#a6ddf2" position={[5, 0, 2]} rotation-y={Math.PI / 2} scale={[8, 2, 1]} />
